@@ -1,7 +1,7 @@
 # Личный проект «Кекстаграм»
 
 * Студент: [Viktoriia Mokhna](https://up.htmlacademy.ru/javascript/26/user/371455).
-* Наставник: `Неизвестно`.
+* Наставник: [Михаил Карямин](https://htmlacademy.ru/profile/id959581).
 
 ---
 
