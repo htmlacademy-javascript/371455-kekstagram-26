@@ -1,7 +1,7 @@
 // модуль, который создаёт данные
 import {
   getRandomPositiveInteger,
-  getRandomArrayElement } from './util';
+  getRandomArrayElement } from './util.js';
 
 //создаем пост пользователя
 
