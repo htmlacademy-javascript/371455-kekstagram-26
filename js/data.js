@@ -53,6 +53,9 @@ const createPost =  (index) => ({
 });
 
 //создаем массив из 25 постов пользователя
-const createPostGroup = Array.from({length: POST_COUNT}, (_, i) => createPost(i));
+const createPostGroup = () => Array.from({length: POST_COUNT}, (_, i) => createPost(i));
 
-export {createPostGroup};
+export {
+  createPostGroup,
+  createPost
+};

@@ -2,6 +2,8 @@
 import './util.js';
 import './data.js';
 import {createPostGroup} from './data.js';
+import { userPosts } from './picture.js';
 
-// createPostGroup();
-console.log(createPostGroup);
+
+const postGroup = createPostGroup();
+userPosts(postGroup);
