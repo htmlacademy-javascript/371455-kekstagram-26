@@ -2,8 +2,10 @@
 import './util.js';
 import './data.js';
 import {createPostGroup} from './data.js';
-import { userPosts } from './picture.js';
+import {createUserPostsMini} from './mini-pic.js';
+import './resize.js';
 
 
 const postGroup = createPostGroup();
-userPosts(postGroup);
+// console.log(postGroup);
+createUserPostsMini(postGroup);
