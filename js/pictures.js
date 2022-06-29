@@ -1,4 +1,6 @@
-const createUserPostsMini = (posts) => {
+import './resize,js';
+
+const createPictureElement = (posts) => {
   const userPictures = document.querySelector('.pictures');
 
   const userPicturesTemplate = document.querySelector('#picture')
@@ -9,6 +11,7 @@ const createUserPostsMini = (posts) => {
 
   posts.forEach(({url, likes, comments}) => {
     const pictureElement = userPicturesTemplate.cloneNode(true);
+    pictureElement.addEventListener('click', () => {openBigPicture(index)});
     pictureElement.querySelector('.picture__img').src = url;
     pictureElement.querySelector('.picture__likes').textContent = likes;
     pictureElement.querySelector('.picture__comments').textContent = comments.length;
@@ -18,4 +21,4 @@ const createUserPostsMini = (posts) => {
   userPictures.append(userPicturesFragment);
 };
 
-export {createUserPostsMini};
+export {createPictureElement};

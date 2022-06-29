@@ -58,5 +58,6 @@ const createPostGroup = () => Array.from({length: POST_COUNT}, (_, i) => createP
 
 export {
   createPostGroup,
-  createPost
+  createPost,
+  createComment
 };
