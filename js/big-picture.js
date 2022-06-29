@@ -1,11 +1,11 @@
 import './data.js';
 import './pictures.js';
 import { isEscapeKey } from './util.js';
-import {postGroup} from './main.js';
+// import {postGroup} from './main.js';
 
 
 const body = document.querySelector('body');
-const smallPicture = document.querySelector('.picture');
+// const smallPicture = document.querySelector('.picture');
 const bigPictureContainer = document.querySelector('.big-picture');
 const closeElementButton = bigPictureContainer.querySelector('.big-picture__cancel');
 const imgElement = bigPictureContainer.querySelector('.big-picture__img img');
@@ -60,14 +60,14 @@ const updateBigPicture = (post) => {
 
 
 //Открываем полноразмерную картинку
-function openBigPicture (index) {
+function openBigPicture (index, post) {
   bigPictureContainer.classList.remove('hidden');
   body.classList.add('modal-open');
   commentCountDivElement.classList.add('hidden');
   newCommentLoaderElement.classList.add('hidden');
 
   document.addEventListener('keydown', onBigPictureEscKeydown);
-  updateBigPicture();
+  updateBigPicture(post);
 }
 
 function closeBigPicture () {
@@ -76,14 +76,6 @@ function closeBigPicture () {
 
   document.addEventListener('keydown', onBigPictureEscKeydown);
 }
-
-// const onPictureClick = document.addEventListener('click', (evt) => {
-//   const smallPicture = evt.target.closest('.picture');
-//   if (smallPicture) {
-//     openBigPicture();
-//   }
-// });
-
 
 closeElementButton.addEventListener('click', () => {
   closeBigPicture ();
