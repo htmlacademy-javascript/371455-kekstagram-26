@@ -1,4 +1,4 @@
-import './data.js';
+import {createPost} from './data.js';
 import './pictures.js';
 import { isEscapeKey } from './util.js';
 // import {postGroup} from './main.js';
@@ -30,14 +30,14 @@ const onBigPictureEscKeydown = (evt) => {
 const createCommentList = (comments) => {
   const commentFragment = document.createDocumentFragment();
 
-  comments.forEach(({avatar,name,message}) => {
+  comments.forEach(({comment}) => {
     const newCommentElement = commentElement.cloneNode(true);
     const photoElement = newCommentElement.querySelector('.social__picture');
     const textElement = newCommentElement.querySelector('.social__text');
 
-    photoElement.src = avatar;
-    photoElement.alt = name;
-    textElement.textContent = message;
+    photoElement.src = comment.avatar;
+    photoElement.alt = comment.name;
+    textElement.textContent = comment.message;
 
     commentFragment.append(newCommentElement);
   });

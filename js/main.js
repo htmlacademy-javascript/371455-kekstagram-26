@@ -10,4 +10,4 @@ const postGroup = createPostGroup();
 // console.log(postGroup);
 createPictureElement(postGroup);
 createCommentList(createComment);
-openBigPicture(index, postGroup);
+openBigPicture(postGroup);

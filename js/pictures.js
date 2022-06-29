@@ -1,4 +1,4 @@
-import './big-picture.js';
+import {openBigPicture} from './big-picture.js';
 
 const createPictureElement = (posts) => {
   const userPictures = document.querySelector('.pictures');
@@ -9,9 +9,9 @@ const createPictureElement = (posts) => {
 
   const userPicturesFragment = document.createDocumentFragment();
 
-  posts.forEach(({url, likes, comments}) => {
+  posts.forEach(({url, likes, comments}, index) => {
     const pictureElement = userPicturesTemplate.cloneNode(true);
-    pictureElement.addEventListener('click', () => {openBigPicture(index, post)});
+    pictureElement.addEventListener('click', () => {openBigPicture(index);});
     pictureElement.querySelector('.picture__img').src = url;
     pictureElement.querySelector('.picture__likes').textContent = likes;
     pictureElement.querySelector('.picture__comments').textContent = comments.length;
