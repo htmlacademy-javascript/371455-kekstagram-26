@@ -1,11 +1,9 @@
-import {createPost} from './data.js';
 import './pictures.js';
 import { isEscapeKey } from './util.js';
-// import {postGroup} from './main.js';
+import {postGroup} from './data.js';
 
 
 const body = document.querySelector('body');
-// const smallPicture = document.querySelector('.picture');
 const bigPictureContainer = document.querySelector('.big-picture');
 const closeElementButton = bigPictureContainer.querySelector('.big-picture__cancel');
 const imgElement = bigPictureContainer.querySelector('.big-picture__img img');
@@ -30,7 +28,7 @@ const onBigPictureEscKeydown = (evt) => {
 const createCommentList = (comments) => {
   const commentFragment = document.createDocumentFragment();
 
-  comments.forEach(({comment}) => {
+  comments.forEach((comment) => {
     const newCommentElement = commentElement.cloneNode(true);
     const photoElement = newCommentElement.querySelector('.social__picture');
     const textElement = newCommentElement.querySelector('.social__text');
@@ -46,8 +44,6 @@ const createCommentList = (comments) => {
   commentsListElement.append(commentFragment);
 };
 
-// createCommentList(createComment);
-
 // Заполняем данными большую картинку
 const updateBigPicture = (post) => {
   imgElement.src = post.url;
@@ -60,14 +56,16 @@ const updateBigPicture = (post) => {
 
 
 //Открываем полноразмерную картинку
-function openBigPicture (index, post) {
+function openBigPicture (index) {
+  const currentPost = postGroup[index];
+
   bigPictureContainer.classList.remove('hidden');
   body.classList.add('modal-open');
   commentCountDivElement.classList.add('hidden');
   newCommentLoaderElement.classList.add('hidden');
 
   document.addEventListener('keydown', onBigPictureEscKeydown);
-  updateBigPicture(post);
+  updateBigPicture(currentPost);
 }
 
 function closeBigPicture () {
