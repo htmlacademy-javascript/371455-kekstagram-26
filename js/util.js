@@ -1,5 +1,9 @@
 // модуль с вспомогательными функциями
 
+// если нажатая клавиша - Esc
+
+const isEscapeKey = (evt) => evt.key === 'Escape';
+
 // Функция для проверки максимальной длины строки.
 const checkStringLength = (string, length) => (string.length <= length);
 
@@ -17,4 +21,5 @@ const getRandomArrayElement = (elements) => elements[getRandomPositiveInteger(0,
 export {
   checkStringLength,
   getRandomPositiveInteger,
-  getRandomArrayElement};
+  getRandomArrayElement,
+  isEscapeKey};

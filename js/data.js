@@ -49,13 +49,17 @@ const createPost =  (index) => ({
   url: `photos/${index + 1}.jpg`,
   description: getRandomArrayElement(DESCRIPTIONS),
   likes: getRandomPositiveInteger(15, 200),
-  comments: createComment(),
+  comments: Array.from({ length: getRandomPositiveInteger(1, 5) }, (_, i) =>
+    createComment(i))
 });
 
 //создаем массив из 25 постов пользователя
 const createPostGroup = () => Array.from({length: POST_COUNT}, (_, i) => createPost(i));
 
+const postGroup = createPostGroup();
+
 export {
-  createPostGroup,
-  createPost
+  postGroup,
+  createPost,
+  createComment
 };

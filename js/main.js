@@ -1,9 +1,7 @@
 
 import './util.js';
 import './data.js';
-import {createPostGroup} from './data.js';
-import { userPosts } from './picture.js';
+import {postGroup} from './data.js';
+import {createPictureElement} from './pictures.js';
 
-
-const postGroup = createPostGroup();
-userPosts(postGroup);
+createPictureElement(postGroup);
