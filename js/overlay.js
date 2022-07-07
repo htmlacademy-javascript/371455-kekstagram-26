@@ -1,34 +1,28 @@
 import {isEscapeKey} from './util.js';
 
 const cancelButton= document.querySelector('#upload-cancel');
+const overlay = document.querySelector('.img-upload__overlay');
 
-const overlay = function (cls) {
-  const ovrl = document.querySelector(cls);
+const overlayOpen = () => {
+  overlay.classList.remove('hidden');
+};
 
-  return {
-    open() {
-      ovrl.classList.remove('hidden');
-    },
-    close() {
-      ovrl.classList.add('hidden');
-    },
-  };
-}('.img-upload__overlay'); //не работает как стрелочная
-
+const overlayClose = () => {
+  overlay.classList.add('hidden');
+};
 
 cancelButton.addEventListener('click', () => {
-  overlay.close();
+  overlayClose();
 });
 
 const onOverlayEscKeydown = (evt) => {
   if (isEscapeKey(evt)) {
     evt.preventDefault();
-    overlay.close();
+    overlayClose();
   }
 };
 
-document.addEventListener('keydown', (onOverlayEscKeydown) => {
-  overlay.close();
-});
+document.addEventListener('keydown', onOverlayEscKeydown);
 
-export {overlay};
+export {overlayClose,
+  overlayOpen};

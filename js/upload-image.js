@@ -1,6 +1,6 @@
 import {Picture,
   FILE_TYPES} from './constants.js';
-import {overlay} from './overlay.js';
+import {overlayOpen} from './overlay.js';
 
 const uploadButton = document.querySelector('#upload-file');
 const previewImg = document.querySelector('.img-upload__preview img');
@@ -19,7 +19,7 @@ uploadButton.addEventListener('change', (evt) => {
       previewImg.width = Picture.WIDTH;
       previewImg.height = Picture.HEIGHT;
 
-      overlay.open();
+      overlayOpen();
     });
 
     reader.readAsDataURL(file);
