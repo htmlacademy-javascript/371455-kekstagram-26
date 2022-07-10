@@ -36,7 +36,7 @@ const MAX_HASHTAGS = 5;
 
 const MAX_SYMBOLS = 140;
 
-const COMMENTS_LIMIT = 5;
+const COMMENTS_LIMIT = 25;
 
 const FILE_TYPES = ['jpg', 'jpeg', 'png'];
 
@@ -49,6 +49,8 @@ const DEFAULT_SCALE_TEXT = '100%';
 const DEFAULT_SCALE_TRANSFORM = 1.0;
 const MIN_RULE = 25;
 const MAX_RULE = 100;
+
+const API_ADDRESS = 'https://26.javascript.pages.academy/kekstagram';
 
 export {POST_COUNT,
   DESCRIPTIONS,
@@ -63,5 +65,6 @@ export {POST_COUNT,
   DEFAULT_SCALE_TEXT,
   DEFAULT_SCALE_TRANSFORM,
   MAX_RULE,
-  MIN_RULE};
+  MIN_RULE,
+  API_ADDRESS};
 

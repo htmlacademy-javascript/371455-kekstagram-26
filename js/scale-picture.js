@@ -1,13 +1,4 @@
-//2.1. Масштаб:
 
-//При нажатии на кнопки .scale__control--smaller и .scale__control--bigger должно
-// изменяться значение поля .scale__control--value;
-// Значение должно изменяться с шагом в 25. Например, если значение поля установлено в 50%,
-//после нажатия на «+», значение должно стать равным 75%. Максимальное значение — 100%,
-//минимальное — 25%. Значение по умолчанию — 100%;
-//При изменении значения поля .scale__control--value изображению внутри .img-upload__preview
-//должен добавляться соответствующий стиль CSS, который с помощью трансформации scale задаёт масштаб.
-//Например, если в поле стоит значение 75%, то в стиле изображения должно быть написано transform: scale(0.75).
 
 //Напишите код, который позволит пользователю редактировать масштаб изображения.
 //Кроме визуального применения эффекта необходимо записывать значение в поле формы с масштабом,
@@ -39,13 +30,17 @@ const onScaleChange = (scaleValue) => {
 
 const zoom = (direction=1) => {
   let currentZoom = Number(zoomValueElement.value.replace('%',''));
-  if (currentZoom + direction*ZOOM_STEP >= MAX_RULE) {
+  const isMax = currentZoom + direction * ZOOM_STEP >= MAX_RULE;
+  const isMin = currentZoom + direction * ZOOM_STEP <= MIN_RULE;
+
+  if (isMax) {
     currentZoom = MAX_RULE;
-  } else if (currentZoom + direction*ZOOM_STEP <= MIN_RULE){
+  } else if (isMin) {
     currentZoom = MIN_RULE;
   } else {
-    currentZoom += direction*ZOOM_STEP;
+    currentZoom += direction * ZOOM_STEP;
   }
+
   onScaleChange (currentZoom);
 };
 
