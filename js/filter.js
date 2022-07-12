@@ -59,9 +59,7 @@ const sliderConfig = {
   connect: 'lower',
 };
 
-const sliderOn = () => {
-  noUiSlider.create(sliderElement, sliderConfig);
-};
+noUiSlider.create(sliderElement, sliderConfig);
 
 
 const applyEffect = () =>  {
@@ -89,6 +87,11 @@ const applyEffect = () =>  {
     imgElement.style.filter = `brightness(${levelEffectElement.value})`;
   }
 };
+
+// let currentFilter = 'none';
+// imgElement.classList.remove(`someClass${currentFilter}`); // для  none этого не требуется, так как у него нету фильтра, это просто для примера
+// currentFilter = newFilter; // получаем значение при переключении фильтров и событию `change`
+// imgElement.classList.add(`someClass${currentFilter}`);
 
 const onEffectSliderUpdate = () => {
 
@@ -157,7 +160,6 @@ const onEffectSliderUpdate = () => {
 };
 
 const turnEffectsOn = () => {
-  sliderOn();
 
   sliderElement.noUiSlider.on('update', () => {
     levelEffectElement.value = sliderElement.noUiSlider.get();
@@ -177,5 +179,8 @@ const turnEffectsOff = () => {
     sliderElement.noUiSlider.destroy();
   }
 };
+
+turnEffectsOn();
+
 
 export {turnEffectsOn, turnEffectsOff};
