@@ -1,4 +1,5 @@
 
+import { getData } from './api.js';
 import './util.js';
 import './data.js';
 import {postGroup} from './data.js';
@@ -9,7 +10,6 @@ import './constants.js';
 import './overlay.js';
 import './scale-picture.js';
 import './filter.js';
-// import './api.js';
-
+import './message.js';
 
 createPictureElement(postGroup);

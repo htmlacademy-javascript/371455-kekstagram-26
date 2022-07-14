@@ -1,32 +1,47 @@
-// // import { createAlertMessage } from './message-popup';
-// import {API_ADDRESS} from './constants.js';
+import {SERVER_URL} from './constants.js';
+import {showMessage} from './message.js';
 
-// const getData = (onSuccess) => {
-//   fetch(`${API_ADDRESS}/data`, { method: 'GET' })
-//     .then((response) => {
-//       if (response.ok) {
-//         return response.json();
-//       }
-//       throw new Error(`${response.status} ${response.statusText}`);
-//     })
-//     .then((posts) => {
-//       onSuccess(posts);
-//     })
-//     .catch(() => {
-//       createAlertMessage();
-//     });
-// };
+const ERROR_MESSAGE = 'Произошла ошибка загрузки данных с сервера.';
 
-// const sendData = (formData, onSuccess, onError) => {
-//   fetch(API_ADDRESS, { method: 'POST', body: formData })
-//     .then((response) => {
-//       if (response.ok) {
-//         onSuccess();
-//         return;
-//       }
-//       onError();
-//     })
-//     .catch(() => onError());
-// };
 
-// export { getData, sendData };
+const getData = async () => {
+  let response;
+
+  try {
+    response = await fetch(`${SERVER_URL}/data`);
+
+    if (!response.ok) {
+      throw new Error(`${response.status} - ${response.statusText}`);
+    }
+  } catch (error) {
+    showMessage(ERROR_MESSAGE);
+    return [];
+  }
+
+  const data = await response.json();
+
+  return data;
+};
+
+const sendData = async (form, onSuccess, onFail) => {
+  try {
+    const response = await fetch(
+      SERVER_URL,
+      {
+        method: 'POST',
+        type: 'multipart/form-data',
+        body: new FormData(form),
+      }
+    );
+
+    if (response.ok) {
+      onSuccess();
+    } else {
+      throw new Error(`${response.status} - ${response.statusText}`);
+    }
+  } catch (error) {
+    onFail();
+  }
+};
+
+export {getData, sendData};
