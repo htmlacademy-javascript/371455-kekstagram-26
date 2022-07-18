@@ -1,5 +1,5 @@
-import {SERVER_URL} from './constants.js';
-import {showMessage} from './message.js';
+import { SERVER_URL } from './constants.js';
+import { showMessage } from './alert.js';
 
 const ERROR_MESSAGE = 'Произошла ошибка загрузки данных с сервера.';
 
@@ -44,4 +44,5 @@ const sendData = async (form, onSuccess, onFail) => {
   }
 };
 
-export {getData, sendData};
+export { getData,
+  sendData };

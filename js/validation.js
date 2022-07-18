@@ -1,8 +1,6 @@
 import {MAX_HASHTAGS,
   MAX_SYMBOLS} from './constants.js';
 
-import { sendData } from './api.js';
-
 //валидация формы
 const reHashtag = /^#[A-Za-zА-Яа-яЁё0-9]{1,19}$/;
 const uploadForm = document.querySelector('.img-upload__form');

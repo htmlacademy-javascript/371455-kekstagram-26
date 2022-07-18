@@ -14,4 +14,4 @@ const onCloseButtonClick = () => {
 
 closeButtonElement.addEventListener('click', onCloseButtonClick);
 
-export {showMessage};
+export { showMessage };
