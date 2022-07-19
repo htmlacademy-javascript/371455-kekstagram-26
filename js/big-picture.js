@@ -1,6 +1,7 @@
 import './pictures.js';
 import { isEscapeKey } from './util.js';
-import {postGroup} from './data.js';
+import { postGroup } from './data.js';
+import { commentsModel } from './comments-model.js';
 
 
 const body = document.querySelector('body');
@@ -15,6 +16,17 @@ const commentCountDivElement = bigPictureContainer.querySelector('.social__comme
 const commentCountElement = bigPictureContainer.querySelector('.comments-count');
 const newCommentLoaderElement = bigPictureContainer.querySelector('.comments-loader');
 
+// кнопка загрузки дополнительных комментариев открыта
+
+const showCommentsMoreButton = () => {
+  newCommentLoaderElement.classList.remove('hidden');
+};
+
+// кнопка загрузки дополнительных комментариев открыта закрывается
+
+const hideCommentsMoreButton = () => {
+  newCommentLoaderElement.classList.add('hidden');
+};
 
 const onBigPictureEscKeydown = (evt) => {
   if (isEscapeKey(evt)) {
@@ -25,7 +37,7 @@ const onBigPictureEscKeydown = (evt) => {
 
 // Добавляем комментарии
 
-const createCommentList = (comments) => {
+const createCommentList = (comments) => { // renderCommentList
   const commentFragment = document.createDocumentFragment();
 
   comments.forEach((comment) => {
@@ -39,9 +51,24 @@ const createCommentList = (comments) => {
 
     commentFragment.append(newCommentElement);
   });
-
-  commentsListElement.innerHTML = '';
   commentsListElement.append(commentFragment);
+};
+
+const clearCommentsList = () => {
+  commentsListElement.innerHTML = '';
+};
+
+const renderStats = (visible, total) => {
+  commentCountDivElement.classList.remove('hidden');
+  commentCountDivElement.textContent = `${visible} из ${total} комментариев`;
+};
+
+const renderLoadButton = (visible, total) => {
+  if (visible === total) {
+    hideCommentsMoreButton();
+  } else {
+    showCommentsMoreButton();
+  }
 };
 
 // Заполняем данными большую картинку
@@ -50,19 +77,29 @@ const updateBigPicture = (post) => {
   descriptionElement.textContent = post.description;
   likesCountElement.textContent = post.likes;
   commentCountElement.textContent = post.comments.length;
+};
 
-  createCommentList(post.comments);
+const onLoadButtonClickHandler = () => {
+  commentsModel.setNextDose();
+  renderStats(commentsModel.getVisible(), commentsModel.getTotal());
+  createCommentList(commentsModel.getCommentDose());
+  renderLoadButton(commentsModel.getVisible(), commentsModel.getTotal());
 };
 
 
 //Открываем полноразмерную картинку
 function openBigPicture (index) {
+  commentsModel.setStart(postGroup[index].comments);
+  renderStats(commentsModel.getVisible(), commentsModel.getTotal());
+  clearCommentsList();
+  createCommentList(commentsModel.getCommentDose());
+  renderLoadButton(commentsModel.getVisible(), commentsModel.getTotal());
+  newCommentLoaderElement.addEventListener('click', onLoadButtonClickHandler);
+
   const currentPost = postGroup[index];
 
   bigPictureContainer.classList.remove('hidden');
   body.classList.add('modal-open');
-  commentCountDivElement.classList.add('hidden');
-  newCommentLoaderElement.classList.add('hidden');
 
   document.addEventListener('keydown', onBigPictureEscKeydown);
   updateBigPicture(currentPost);
@@ -71,7 +108,7 @@ function openBigPicture (index) {
 function closeBigPicture () {
   bigPictureContainer.classList.add('hidden');
   body.classList.remove('modal-open');
-
+  newCommentLoaderElement.removeEventListener('click', onLoadButtonClickHandler);
   document.addEventListener('keydown', onBigPictureEscKeydown);
 }
 
@@ -79,8 +116,6 @@ closeElementButton.addEventListener('click', () => {
   closeBigPicture ();
 });
 
-export {createCommentList,
-  updateBigPicture,
-  openBigPicture,
-  closeBigPicture
-};
+
+export { openBigPicture,
+  closeBigPicture };

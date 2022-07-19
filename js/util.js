@@ -18,8 +18,21 @@ function getRandomPositiveInteger (a, b) {
 // возвращает случайный элемент массива
 const getRandomArrayElement = (elements) => elements[getRandomPositiveInteger(0, elements.length -1)];
 
+const debounce = (callback, delay) => {
+  let timeoutId;
+  return (...rest) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(
+      () => callback.apply(this, rest), delay
+    );
+  };
+};
+
+
 export {
   checkStringLength,
   getRandomPositiveInteger,
   getRandomArrayElement,
-  isEscapeKey};
+  isEscapeKey,
+  debounce
+};
