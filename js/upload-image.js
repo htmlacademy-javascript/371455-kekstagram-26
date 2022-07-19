@@ -1,6 +1,6 @@
-import {Picture,
-  FILE_TYPES} from './constants.js';
-import {overlayOpen} from './overlay.js';
+import  {Picture,
+  FILE_TYPES } from './constants.js';
+import { overlayOpen } from './overlay.js';
 
 const uploadButton = document.querySelector('#upload-file');
 const previewImg = document.querySelector('.img-upload__preview img');

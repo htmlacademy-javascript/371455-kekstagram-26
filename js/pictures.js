@@ -1,4 +1,4 @@
-import {openBigPicture} from './big-picture.js';
+import { openBigPicture } from './big-picture.js';
 
 const createPictureElement = (posts) => {
   const userPictures = document.querySelector('.pictures');
@@ -21,4 +21,4 @@ const createPictureElement = (posts) => {
   userPictures.append(userPicturesFragment);
 };
 
-export {createPictureElement};
+export { createPictureElement };

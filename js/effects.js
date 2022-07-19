@@ -1,3 +1,4 @@
+
 //применение эффекта для изображения
 
 const EffectsOption = {
@@ -63,7 +64,6 @@ const sliderEffectElement = uploadForm.querySelector('.effect-level');
 const levelEffectElement = sliderEffectElement.querySelector('.effect-level__value');
 const sliderElement = document.querySelector('.effect-level__slider');
 
-
 // Инициализировать слайдер
 const sliderConfig = {
   range: {
@@ -77,7 +77,6 @@ const sliderConfig = {
 
 noUiSlider.create(sliderElement, sliderConfig);
 
-
 const applyEffect = () =>  {
   for (let effect in EffectsOption) {
     if (imgElement.classList.contains(`effects__preview--${effect}`)) {
@@ -86,7 +85,6 @@ const applyEffect = () =>  {
     }
   }
 };
-
 
 const onEffectSliderUpdate = () => {
 
@@ -113,7 +111,6 @@ const onEffectSliderUpdate = () => {
           sliderElement.noUiSlider.updateOptions(sliderConfig);
           return;
         }
-      }
     });
   }
 };

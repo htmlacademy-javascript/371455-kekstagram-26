@@ -1,14 +1,11 @@
 // модуль, который создаёт данные
-import {
-  getRandomPositiveInteger,
+import { getRandomPositiveInteger,
   getRandomArrayElement } from './util.js';
 
-import {
-  MESSAGES,
+import { MESSAGES,
   NAMES,
   DESCRIPTIONS,
-  POST_COUNT,
-  COMMENTS_LIMIT} from './constants.js';
+  POST_COUNT } from './constants.js';
 
 //создаем пост пользователя
 
@@ -26,7 +23,7 @@ const createPost =  (index) => ({
   url: `photos/${index + 1}.jpg`,
   description: getRandomArrayElement(DESCRIPTIONS),
   likes: getRandomPositiveInteger(15, 200),
-  comments: Array.from({ length: getRandomPositiveInteger(1, COMMENTS_LIMIT) }, (_, i) =>
+  comments: Array.from({ length: getRandomPositiveInteger(1, 33) }, (_, i) =>
     createComment(i))
 });
 

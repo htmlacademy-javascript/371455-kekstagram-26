@@ -12,7 +12,7 @@ import {ZOOM_STEP,
 
 const uploadForm = document.querySelector('.img-upload__form');
 
-//const zoomController = (uploadForm) => {};
+
 const zoomOutElement = uploadForm.querySelector('.scale__control--smaller');
 const zoomInElement = uploadForm.querySelector('.scale__control--bigger');
 const zoomValueElement = uploadForm.querySelector('.scale__control--value');
