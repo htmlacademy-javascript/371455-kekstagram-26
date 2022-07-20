@@ -27,44 +27,9 @@ const MESSAGES = [
   'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!',
 ];
 
-const Picture = {
-  WIDTH: 600,
-  HEIGHT: 600,
-};
-
-const MAX_HASHTAGS = 5;
-
-const MAX_SYMBOLS = 140;
-
-const COMMENTS_LIMIT = 25;
-
-const FILE_TYPES = ['jpg', 'jpeg', 'png'];
-
-// const HASHTAG_LENGTH_MIN = 2;
-
-// const HASHTAG_LENGTH_MAX = 20;
-
-const ZOOM_STEP = 25;
-const DEFAULT_SCALE_TEXT = '100%';
-const DEFAULT_SCALE_TRANSFORM = 1.0;
-const MIN_RULE = 25;
-const MAX_RULE = 100;
-
-const API_ADDRESS = 'https://26.javascript.pages.academy/kekstagram';
 
 export {POST_COUNT,
   DESCRIPTIONS,
   NAMES,
-  MESSAGES,
-  Picture,
-  MAX_HASHTAGS,
-  MAX_SYMBOLS,
-  COMMENTS_LIMIT,
-  FILE_TYPES,
-  ZOOM_STEP,
-  DEFAULT_SCALE_TEXT,
-  DEFAULT_SCALE_TRANSFORM,
-  MAX_RULE,
-  MIN_RULE,
-  API_ADDRESS};
+  MESSAGES};
 

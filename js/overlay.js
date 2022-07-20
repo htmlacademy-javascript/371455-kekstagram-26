@@ -24,5 +24,4 @@ const onOverlayEscKeydown = (evt) => {
 
 document.addEventListener('keydown', onOverlayEscKeydown);
 
-export {overlayClose,
-  overlayOpen};
+export { overlayOpen, overlayClose };

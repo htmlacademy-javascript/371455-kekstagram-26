@@ -6,6 +6,7 @@ import {postGroup} from './data.js';
 const body = document.querySelector('body');
 const bigPictureContainer = document.querySelector('.big-picture');
 const closeElementButton = bigPictureContainer.querySelector('.big-picture__cancel');
+
 const imgElement = bigPictureContainer.querySelector('.big-picture__img img');
 const likesCountElement = bigPictureContainer.querySelector('.likes-count');
 const descriptionElement = bigPictureContainer.querySelector('.social__caption');
@@ -15,6 +16,17 @@ const commentCountDivElement = bigPictureContainer.querySelector('.social__comme
 const commentCountElement = bigPictureContainer.querySelector('.comments-count');
 const newCommentLoaderElement = bigPictureContainer.querySelector('.comments-loader');
 
+// кнопка загрузки дополнительных комментариев открыта
+
+const showCommentsMoreButton = () => {
+  newCommentLoaderElement.classList.remove('hidden');
+};
+
+// кнопка загрузки дополнительных комментариев закрывается
+
+const hideCommentsMoreButton = () => {
+  newCommentLoaderElement.classList.add('hidden');
+};
 
 const onBigPictureEscKeydown = (evt) => {
   if (isEscapeKey(evt)) {
@@ -25,7 +37,7 @@ const onBigPictureEscKeydown = (evt) => {
 
 // Добавляем комментарии
 
-const createCommentList = (comments) => {
+const renderCommentList = (comments) => {
   const commentFragment = document.createDocumentFragment();
 
   comments.forEach((comment) => {
@@ -51,12 +63,23 @@ const updateBigPicture = (post) => {
   likesCountElement.textContent = post.likes;
   commentCountElement.textContent = post.comments.length;
 
-  createCommentList(post.comments);
+const onLoadButtonClickHandler = () => {
+  commentsModel.setNextDose();
+  renderStats(commentsModel.getVisible(), commentsModel.getTotal());
+  renderCommentList(commentsModel.getCommentDose());
+  renderLoadButton(commentsModel.getVisible(), commentsModel.getTotal());
 };
 
 
 //Открываем полноразмерную картинку
 function openBigPicture (index) {
+  commentsModel.setStart(postGroup[index].comments);
+  renderStats(commentsModel.getVisible(), commentsModel.getTotal());
+  clearCommentsList();
+  renderCommentList(commentsModel.getCommentDose());
+  renderLoadButton(commentsModel.getVisible(), commentsModel.getTotal());
+  newCommentLoaderElement.addEventListener('click', onLoadButtonClickHandler);
+
   const currentPost = postGroup[index];
 
   bigPictureContainer.classList.remove('hidden');
@@ -78,9 +101,6 @@ function closeBigPicture () {
 closeElementButton.addEventListener('click', () => {
   closeBigPicture ();
 });
-
-export {createCommentList,
-  updateBigPicture,
-  openBigPicture,
-  closeBigPicture
 };
+
+export { openBigPicture, closeBigPicture };

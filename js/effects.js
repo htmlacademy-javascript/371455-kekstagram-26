@@ -79,6 +79,7 @@ noUiSlider.create(sliderElement, sliderConfig);
 
 
 const applyEffect = () =>  {
+  // eslint-disable-next-line prefer-const
   for (let effect in EffectsOption) {
     if (imgElement.classList.contains(`effects__preview--${effect}`)) {
       imgElement.style.filter = EffectsOption[effect].getCssFilterValue(levelEffectElement.value);
@@ -108,6 +109,7 @@ const onEffectSliderUpdate = () => {
         sliderElement.removeAttribute('disabled');
       }
 
+      // eslint-disable-next-line prefer-const
       for (let effect in EffectsOption) {
         if (imgElement.classList.contains(`effects__preview--${effect}`) && typeof EffectsOption[effect].config !== 'undefined') {
           sliderElement.noUiSlider.updateOptions(sliderConfig);
