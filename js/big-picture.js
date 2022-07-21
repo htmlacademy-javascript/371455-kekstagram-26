@@ -97,7 +97,6 @@ const openBigPicture = (post) => {
   updateBigPicture(post);
 };
 
-// !!!!!!!!!!!! как тут быть onBigPictureEscKeydown - использует closeBigPicture
 function closeBigPicture () {
   bigPictureContainer.classList.add('hidden');
   body.classList.remove('modal-open');
@@ -109,4 +108,4 @@ closeElementButton.addEventListener('click', () => {
   closeBigPicture ();
 });
 
-export { openBigPicture, closeBigPicture };
+export { body, openBigPicture, closeBigPicture };

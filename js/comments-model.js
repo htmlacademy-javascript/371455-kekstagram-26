@@ -1,6 +1,6 @@
 const COMMENTS_LIMIT = 5;
 
-const model = {
+const Model = {
   comments: [],
   commentsVisible: 0,
   commentsTotal: 0,
@@ -8,29 +8,29 @@ const model = {
 };
 
 const setStart = (comments) => {
-  model.comments = comments;
-  model.commentsVisible = (comments.length - COMMENTS_LIMIT >= 0) ? COMMENTS_LIMIT : comments.length;
-  model.commentsTotal = comments.length;
-  model.lastCommentVisible = 0;
+  Model.comments = comments;
+  Model.commentsVisible = (comments.length - COMMENTS_LIMIT >= 0) ? COMMENTS_LIMIT : comments.length;
+  Model.commentsTotal = comments.length;
+  Model.lastCommentVisible = 0;
 };
 
 const setNextDose = () => {
-  if (model.commentsVisible + COMMENTS_LIMIT < model.commentsTotal) {
-    model.lastCommentVisible = model.commentsVisible;
-    model.commentsVisible += COMMENTS_LIMIT;
+  if (Model.commentsVisible + COMMENTS_LIMIT < Model.commentsTotal) {
+    Model.lastCommentVisible = Model.commentsVisible;
+    Model.commentsVisible += COMMENTS_LIMIT;
   } else {
-    model.lastCommentVisible = model.commentsVisible;
-    model.commentsVisible = model.commentsTotal;
+    Model.lastCommentVisible = Model.commentsVisible;
+    Model.commentsVisible = Model.commentsTotal;
   }
 };
 
-const getCommentDose = () => model.comments.slice(model.lastCommentVisible, model.commentsVisible);
+const getCommentDose = () => Model.comments.slice(Model.lastCommentVisible, Model.commentsVisible);
 
-const getModel = () => model;
+const getModel = () => Model;
 
-const getVisible = () => model.commentsVisible;
+const getVisible = () => Model.commentsVisible;
 
-const getTotal = () => model.commentsTotal;
+const getTotal = () => Model.commentsTotal;
 
 const commentsModel = {
   setStart,

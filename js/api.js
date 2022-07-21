@@ -15,7 +15,6 @@ const getData = async (onSuccess) => {
     showAlertMessage(ERROR_MESSAGE);
     return [];
   }
-
   const data = await response.json();
 
   onSuccess(data);

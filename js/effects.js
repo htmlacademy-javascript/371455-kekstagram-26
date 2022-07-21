@@ -1,6 +1,6 @@
 //применение эффекта для изображения
 
-const EffectsOption = {
+const effectsOption = {
   'chrome' : {
     config: {
       range: {min: 0, max: 1},
@@ -54,7 +54,6 @@ const EffectsOption = {
   },
 };
 
-
 const uploadForm = document.querySelector('.img-upload__form');
 const imgElement = uploadForm.querySelector('.img-upload__preview img');
 const effectsListElement = uploadForm.querySelector('.effects__list');
@@ -62,7 +61,6 @@ const effectsItemsElement = effectsListElement.querySelectorAll('.effects__item'
 const sliderEffectElement = uploadForm.querySelector('.effect-level');
 const levelEffectElement = sliderEffectElement.querySelector('.effect-level__value');
 const sliderElement = document.querySelector('.effect-level__slider');
-
 
 // Инициализировать слайдер
 const sliderConfig = {
@@ -77,20 +75,17 @@ const sliderConfig = {
 
 noUiSlider.create(sliderElement, sliderConfig);
 
-
 const applyEffect = () =>  {
   // eslint-disable-next-line prefer-const
-  for (let effect in EffectsOption) {
+  for (let effect in effectsOption) {
     if (imgElement.classList.contains(`effects__preview--${effect}`)) {
-      imgElement.style.filter = EffectsOption[effect].getCssFilterValue(levelEffectElement.value);
+      imgElement.style.filter = effectsOption[effect].getCssFilterValue(levelEffectElement.value);
       return;
     }
   }
 };
 
-
 const onEffectSliderUpdate = () => {
-
   for (const effectsItemElement of effectsItemsElement) {
     const effectRadioElement = effectsItemElement.querySelector('.effects__radio');
 
@@ -110,8 +105,8 @@ const onEffectSliderUpdate = () => {
       }
 
       // eslint-disable-next-line prefer-const
-      for (let effect in EffectsOption) {
-        if (imgElement.classList.contains(`effects__preview--${effect}`) && typeof EffectsOption[effect].config !== 'undefined') {
+      for (let effect in effectsOption) {
+        if (imgElement.classList.contains(`effects__preview--${effect}`) && typeof effectsOption[effect].config !== 'undefined') {
           sliderElement.noUiSlider.updateOptions(sliderConfig);
           return;
         }
@@ -121,14 +116,12 @@ const onEffectSliderUpdate = () => {
 };
 
 const turnEffectsOn = () => {
-
   sliderElement.noUiSlider.on('update', () => {
     levelEffectElement.value = sliderElement.noUiSlider.get();
     applyEffect();
   });
 
   onEffectSliderUpdate();
-
 };
 
 const turnEffectsOff = () => {

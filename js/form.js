@@ -3,7 +3,6 @@ import { overlayClose } from './overlay.js';
 import { isUploadFormValid, resetValidator } from './validation.js';
 import { resetScale } from './scale-picture.js';
 import { showPopupMessage } from './popup-messages.js';
-import { removeActiveClass } from './filters.js';
 
 const formElement = document.querySelector('.img-upload__form');
 const formSubmitElement = formElement.querySelector('.img-upload__submit');
@@ -61,7 +60,6 @@ const resetForm = () => {
 
   resetValidator();
   resetScale();
-  removeActiveClass();
 };
 
 textFieldElements.forEach((field) => {
