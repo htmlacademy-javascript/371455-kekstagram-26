@@ -25,10 +25,6 @@ const createPictureElement = (posts) => {
     pictureElement.querySelector('.picture__likes').textContent = likes;
     pictureElement.querySelector('.picture__comments').textContent = comments.length;
     userPicturesFragment.append(pictureElement);
-
-    // pictureElement.addEventListener('click', () => {
-    //   openBigPicture(index);
-    // });
   });
 
   removeAllPictures();

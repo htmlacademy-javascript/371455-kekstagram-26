@@ -1,7 +1,8 @@
 // модуль с вспомогательными функциями
-const TIME_OUT_DELAY = 500;
-// если нажатая клавиша - Esc
 
+const TIME_OUT_DELAY = 500;
+
+// если нажатая клавиша - Esc
 const isEscapeKey = (evt) => evt.key === 'Escape';
 
 // Функция для проверки максимальной длины строки.
@@ -28,8 +29,8 @@ const debounce = (callback, timeoutDelay = TIME_OUT_DELAY) =>{
   };
 };
 
-
 export {
+  TIME_OUT_DELAY,
   checkStringLength,
   getRandomPositiveInteger,
   getRandomArrayElement,

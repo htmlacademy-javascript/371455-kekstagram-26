@@ -1,17 +1,14 @@
 import { getRandomArrayElement, debounce } from './util.js';
 import { createPictureElement } from './pictures.js';
+import { TIME_OUT_DELAY } from './util.js';
 
 const RANDOM_PHOTO_NUMBER = 10;
-const DEBOUNCE_DELAY = 500;
-
 const imgFilters = document.querySelector('.img-filters');
 const randomFilter = imgFilters.querySelector('#filter-random');
 const discussedFilter = imgFilters.querySelector('#filter-discussed');
 const defaultFilter = imgFilters.querySelector('#filter-default');
 
-
 // Удаляем фото
-
 const removePosts = () => {
   const picture = document.querySelectorAll('.picture');
   picture.forEach((post) => post.remove());
@@ -34,14 +31,12 @@ const getRandomPosts = (posts) => {
 };
 
 // для фильтра обсуждаемых
-
 const getDiscussedPosts = (posts) => {
   const compareCommentLengths = (firstPost, secondPost) => (secondPost.comments.length - firstPost.comments.length);
   const popularPosts = posts.slice().sort(compareCommentLengths);
 
   return popularPosts;
 };
-
 
 const removeActiveClass = () => {
   randomFilter.classList.remove('img-filters__button--active');
@@ -58,7 +53,7 @@ const activateFilters = (posts) => {
     randomFilter.classList.add('img-filters__button--active');
     const randomPost = getRandomPosts(posts);
     createPictureElement(randomPost);
-  }, DEBOUNCE_DELAY));
+  }, TIME_OUT_DELAY));
 
   discussedFilter.addEventListener('click', debounce(() => {
     removePosts();
@@ -68,7 +63,7 @@ const activateFilters = (posts) => {
     const discussedPosts = getDiscussedPosts(posts);
 
     createPictureElement(discussedPosts);
-  }, DEBOUNCE_DELAY));
+  }, TIME_OUT_DELAY));
 
   defaultFilter.addEventListener('click', debounce(() => {
     removePosts();
@@ -76,8 +71,7 @@ const activateFilters = (posts) => {
     defaultFilter.classList.add('img-filters__button--active');
 
     createPictureElement(posts);
-  }, DEBOUNCE_DELAY));
+  }, TIME_OUT_DELAY));
 };
 
-
-export { activateFilters };
+export { activateFilters, removeActiveClass };
