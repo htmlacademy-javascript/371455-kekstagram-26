@@ -44,16 +44,16 @@ const getDiscussedPosts = (posts) => {
 
 
 const removeActiveClass = () => {
-  randomFilter.classList.remove('.img-filters__button--active');
-  discussedFilter.classList.remove('.img-filters__button--active');
-  defaultFilter.classList.remove('.img-filters__button--active');
+  randomFilter.classList.remove('img-filters__button--active');
+  discussedFilter.classList.remove('img-filters__button--active');
+  defaultFilter.classList.remove('img-filters__button--active');
 };
 
 const activateFilters = (posts) => {
-  removePosts();
   imgFilters.classList.remove('img-filters--inactive');
 
   randomFilter.addEventListener('click', debounce(() => {
+    removePosts();
     removeActiveClass();
     randomFilter.classList.add('.img-filters__button--active');
     const randomPost = getRandomPosts(posts);
@@ -61,6 +61,7 @@ const activateFilters = (posts) => {
   }, DEBOUNCE_DELAY));
 
   discussedFilter.addEventListener('click', debounce(() => {
+    removePosts();
     removeActiveClass();
     discussedFilter.classList.add('.img-filters__button--active');
 
@@ -70,6 +71,7 @@ const activateFilters = (posts) => {
   }, DEBOUNCE_DELAY));
 
   defaultFilter.addEventListener('click', debounce(() => {
+    removePosts();
     removeActiveClass();
     defaultFilter.classList.add('.img-filters__button--active');
 
