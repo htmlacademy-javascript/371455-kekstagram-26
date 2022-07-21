@@ -1,10 +1,4 @@
-<<<<<<< Updated upstream
-import {Picture,
-  FILE_TYPES} from './constants.js';
-import {overlayOpen} from './overlay.js';
-=======
 import { overlayOpen } from './overlay.js';
->>>>>>> Stashed changes
 
 const Picture = {
   WIDTH: 600,

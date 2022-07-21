@@ -1,4 +1,4 @@
-import {openBigPicture} from './big-picture.js';
+import { openBigPicture } from './big-picture.js';
 
 const removeAllPictures = () => {
   const pictures = document.querySelectorAll('.picture');
@@ -36,4 +36,4 @@ const createPictureElement = (post) => {
   userPictures.append(userPicturesFragment);
 };
 
-export {createPictureElement};
+export { createPictureElement };

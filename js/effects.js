@@ -143,4 +143,4 @@ const turnEffectsOff = () => {
 
 turnEffectsOn();
 
-export {turnEffectsOn, turnEffectsOff};
+export { turnEffectsOn, turnEffectsOff };
