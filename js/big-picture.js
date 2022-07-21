@@ -1,6 +1,6 @@
 import './pictures.js';
 import { isEscapeKey } from './util.js';
-import { setPosts } from './data.js';
+// import { setPosts } from './data.js';
 import { commentsModel } from './comments-model.js';
 
 
@@ -89,21 +89,19 @@ const onLoadButtonClickHandler = () => {
 
 
 //Открываем полноразмерную картинку
-function openBigPicture (index) {
-  commentsModel.setStart(setPosts[index].comments);
+function openBigPicture (post) {
+  commentsModel.setStart(post.comments);
   renderStats(commentsModel.getVisible(), commentsModel.getTotal());
   clearCommentsList();
   renderCommentList(commentsModel.getCommentDose());
   renderLoadButton(commentsModel.getVisible(), commentsModel.getTotal());
   newCommentLoaderElement.addEventListener('click', onLoadButtonClickHandler);
 
-  const currentPost = setPosts[index];
-
   bigPictureContainer.classList.remove('hidden');
   body.classList.add('modal-open');
 
   document.addEventListener('keydown', onBigPictureEscKeydown);
-  updateBigPicture(currentPost);
+  updateBigPicture(post);
 }
 
 function closeBigPicture () {

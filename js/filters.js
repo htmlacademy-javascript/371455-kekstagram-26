@@ -55,7 +55,7 @@ const activateFilters = (posts) => {
   randomFilter.addEventListener('click', debounce(() => {
     removePosts();
     removeActiveClass();
-    randomFilter.classList.add('.img-filters__button--active');
+    randomFilter.classList.add('img-filters__button--active');
     const randomPost = getRandomPosts(posts);
     createPictureElement(randomPost);
   }, DEBOUNCE_DELAY));
@@ -63,7 +63,7 @@ const activateFilters = (posts) => {
   discussedFilter.addEventListener('click', debounce(() => {
     removePosts();
     removeActiveClass();
-    discussedFilter.classList.add('.img-filters__button--active');
+    discussedFilter.classList.add('img-filters__button--active');
 
     const discussedPosts = getDiscussedPosts(posts);
 
@@ -73,7 +73,7 @@ const activateFilters = (posts) => {
   defaultFilter.addEventListener('click', debounce(() => {
     removePosts();
     removeActiveClass();
-    defaultFilter.classList.add('.img-filters__button--active');
+    defaultFilter.classList.add('img-filters__button--active');
 
     createPictureElement(posts);
   }, DEBOUNCE_DELAY));

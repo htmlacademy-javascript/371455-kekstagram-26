@@ -9,7 +9,7 @@ import './overlay.js';
 import './scale-picture.js';
 import './effects.js';
 import { setPosts } from './data.js';
-// import './form.js';
+// import {setUserFormSubmit} from './form.js';
 
 
 getData((posts) => {
@@ -17,3 +17,4 @@ getData((posts) => {
   setPosts(posts);
   setTimeout(() => activateFilters(posts), 500);
 }, showAlertMessage);
+

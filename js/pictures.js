@@ -9,7 +9,7 @@ const removeAllPictures = () => {
 
 removeAllPictures();
 
-const createPictureElement = (post) => {
+const createPictureElement = (posts) => {
   const userPictures = document.querySelector('.pictures');
 
   const userPicturesTemplate = document.querySelector('#picture')
@@ -18,17 +18,17 @@ const createPictureElement = (post) => {
 
   const userPicturesFragment = document.createDocumentFragment();
 
-  post.forEach(({url, likes, comments}, index) => {
+  posts.forEach(({url, likes, comments}, index) => {
     const pictureElement = userPicturesTemplate.cloneNode(true);
-    pictureElement.addEventListener('click', () => openBigPicture(index));
+    pictureElement.addEventListener('click', () => openBigPicture(posts[index]));
     pictureElement.querySelector('.picture__img').src = url;
     pictureElement.querySelector('.picture__likes').textContent = likes;
     pictureElement.querySelector('.picture__comments').textContent = comments.length;
     userPicturesFragment.append(pictureElement);
 
-    pictureElement.addEventListener('click', () => {
-      openBigPicture(post);
-    });
+    // pictureElement.addEventListener('click', () => {
+    //   openBigPicture(index);
+    // });
   });
 
   removeAllPictures();

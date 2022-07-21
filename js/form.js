@@ -40,7 +40,6 @@ const setUserFormSubmit = (onSuccess) =>{
 
     const isValid = isUploadFormValid();
     if (isValid) {
-      blockSubmitButton();
       sendData (
         () => {
           onSuccess();
@@ -53,6 +52,7 @@ const setUserFormSubmit = (onSuccess) =>{
         new FormData(evt.target),
       );
     }
+    blockSubmitButton();
   });
 };
 
