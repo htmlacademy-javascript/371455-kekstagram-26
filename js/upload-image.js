@@ -1,6 +1,11 @@
-import  {Picture,
-  FILE_TYPES } from './constants.js';
 import { overlayOpen } from './overlay.js';
+
+const Picture = {
+  WIDTH: 600,
+  HEIGHT: 600,
+};
+
+const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png', 'heic'];
 
 const uploadButton = document.querySelector('#upload-file');
 const previewImg = document.querySelector('.img-upload__preview img');

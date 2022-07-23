@@ -3,7 +3,7 @@ const messageElement = templateMessage.cloneNode(true);
 const textElement = messageElement.querySelector('.message__text');
 const closeButtonElement = messageElement.querySelector('.message__close');
 
-const showMessage = (message) => {
+const showAlertMessage = (message) => {
   textElement.textContent = message;
   document.body.append(messageElement);
 };
@@ -14,4 +14,4 @@ const onCloseButtonClick = () => {
 
 closeButtonElement.addEventListener('click', onCloseButtonClick);
 
-export { showMessage };
+export { showAlertMessage };

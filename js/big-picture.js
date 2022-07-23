@@ -1,8 +1,6 @@
 import './pictures.js';
 import { isEscapeKey } from './util.js';
-import { postGroup } from './data.js';
 import { commentsModel } from './comments-model.js';
-
 
 const body = document.querySelector('body');
 const bigPictureContainer = document.querySelector('.big-picture');
@@ -17,13 +15,11 @@ const commentCountElement = bigPictureContainer.querySelector('.comments-count')
 const newCommentLoaderElement = bigPictureContainer.querySelector('.comments-loader');
 
 // кнопка загрузки дополнительных комментариев открыта
-
 const showCommentsMoreButton = () => {
   newCommentLoaderElement.classList.remove('hidden');
 };
 
-// кнопка загрузки дополнительных комментариев открыта закрывается
-
+// кнопка загрузки дополнительных комментариев закрывается
 const hideCommentsMoreButton = () => {
   newCommentLoaderElement.classList.add('hidden');
 };
@@ -36,8 +32,7 @@ const onBigPictureEscKeydown = (evt) => {
 };
 
 // Добавляем комментарии
-
-const createCommentList = (comments) => { // renderCommentList
+const renderCommentList = (comments) => {
   const commentFragment = document.createDocumentFragment();
 
   comments.forEach((comment) => {
@@ -82,40 +77,35 @@ const updateBigPicture = (post) => {
 const onLoadButtonClickHandler = () => {
   commentsModel.setNextDose();
   renderStats(commentsModel.getVisible(), commentsModel.getTotal());
-  createCommentList(commentsModel.getCommentDose());
+  renderCommentList(commentsModel.getCommentDose());
   renderLoadButton(commentsModel.getVisible(), commentsModel.getTotal());
 };
 
-
 //Открываем полноразмерную картинку
-function openBigPicture (index) {
-  commentsModel.setStart(postGroup[index].comments);
+const openBigPicture = (post) => {
+  commentsModel.setStart(post.comments);
   renderStats(commentsModel.getVisible(), commentsModel.getTotal());
   clearCommentsList();
-  createCommentList(commentsModel.getCommentDose());
+  renderCommentList(commentsModel.getCommentDose());
   renderLoadButton(commentsModel.getVisible(), commentsModel.getTotal());
   newCommentLoaderElement.addEventListener('click', onLoadButtonClickHandler);
-
-  const currentPost = postGroup[index];
 
   bigPictureContainer.classList.remove('hidden');
   body.classList.add('modal-open');
 
   document.addEventListener('keydown', onBigPictureEscKeydown);
-  updateBigPicture(currentPost);
-}
+  updateBigPicture(post);
+};
 
 function closeBigPicture () {
   bigPictureContainer.classList.add('hidden');
   body.classList.remove('modal-open');
   newCommentLoaderElement.removeEventListener('click', onLoadButtonClickHandler);
-  document.addEventListener('keydown', onBigPictureEscKeydown);
+  document.removeEventListener('keydown', onBigPictureEscKeydown);
 }
 
 closeElementButton.addEventListener('click', () => {
   closeBigPicture ();
 });
 
-
-export { openBigPicture,
-  closeBigPicture };
+export { body, openBigPicture, closeBigPicture };
