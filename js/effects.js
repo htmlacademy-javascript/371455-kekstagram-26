@@ -136,8 +136,7 @@ const resetEffects = () => {
   imgElement.style.filter = 'none';
   imgElement.classList.remove(...imgElement.classList);
   imgElement.classList.add('effects__preview--none');
-  sliderElement.noUiSlider.destroy();
-  noUiSlider.create(sliderElement, sliderConfig);
+  sliderElement. noUiSkider.updateOptions({start: 0});
 };
 
 turnEffectsOn();

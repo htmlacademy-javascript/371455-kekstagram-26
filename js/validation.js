@@ -49,7 +49,6 @@ const isAllHashtagsValid = (value) => {
   return hashtags.every((hashtag) => isValidHashtag(hashtag));
 };
 
-
 pristine.addValidator(hashtagInput, isAllHashtagsValid, ErrorMessages.WRONG_MESSAGE);
 pristine.addValidator(hashtagInput, (value) => isValidHashtagLength(value), ErrorMessages.HASHTAG_MAX_NUMBER);
 pristine.addValidator(hashtagInput, (value) => isHashtagUnique(value), ErrorMessages.UNIQUE_HASHTAG);
@@ -68,6 +67,5 @@ uploadForm.addEventListener('submit', onFormSubmit);
 uploadForm.addEventListener('reset', () => {
   resetValidator();
 });
-
 
 export { resetValidator, isUploadFormValid };
