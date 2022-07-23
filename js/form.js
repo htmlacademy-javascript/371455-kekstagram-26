@@ -3,11 +3,15 @@ import { overlayClose } from './overlay.js';
 import { isUploadFormValid, resetValidator } from './validation.js';
 import { resetScale } from './scale-picture.js';
 import { showPopupMessage } from './popup-messages.js';
+import { resetEffects } from './effects.js';
+import { body } from './big-picture.js';
 
 const formElement = document.querySelector('.img-upload__form');
 const formSubmitElement = formElement.querySelector('.img-upload__submit');
 const uploadFileElement = formElement.querySelector('#upload-file');
 const textFieldElements = formElement.querySelectorAll('[name="hashtags"], [name="description"]');
+const uploadCancelButton = document.querySelector('.img-upload__cancel');
+
 
 //Блокировка кнопки
 const blockSubmitButton = () => {
@@ -20,6 +24,27 @@ const unblockSubmitButton = () => {
   formSubmitElement.disabled = false;
   formSubmitElement.textContent = 'Опубликовать';
 };
+
+const resetForm = () => {
+  overlayClose();
+  resetEffects();
+  body.classList.remove('modal-open');
+  formElement.reset();
+  resetValidator();
+  resetScale();
+
+  uploadCancelButton.removeEventListener ('click', onFormReset);
+
+  uploadFileElement.value = '';
+
+  textFieldElements.forEach((field) => {
+    field.value = '';
+  });
+};
+
+function onFormReset () {
+  resetForm();
+}
 
 //функция рендерит поп-ап о успехе
 const onSuccess = () => {
@@ -48,18 +73,8 @@ const setUserFormSubmit = () =>{
         onError,
       );
     }
+    resetForm();
   });
-};
-
-const resetForm = () => {
-  uploadFileElement.value = '';
-
-  textFieldElements.forEach((field) => {
-    field.value = '';
-  });
-
-  resetValidator();
-  resetScale();
 };
 
 textFieldElements.forEach((field) => {

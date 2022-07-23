@@ -12,12 +12,6 @@ const zoomInElement = uploadForm.querySelector('.scale__control--bigger');
 const zoomValueElement = uploadForm.querySelector('.scale__control--value');
 const imgElement = uploadForm.querySelector('.img-upload__preview img');
 
-//Default image scale values
-const resetScale = () => {
-  zoomValueElement.value = DEFAULT_SCALE_TEXT;
-  imgElement.style.transform = DEFAULT_SCALE_TRANSFORM;
-};
-
 const onScaleChange = (scaleValue) => {
 
   imgElement.style.transform = `scale(${scaleValue / 100})`;
@@ -40,12 +34,16 @@ const zoom = (direction=1) => {
   onScaleChange (currentZoom);
 };
 
-zoomOutElement.addEventListener('click', () => {
-  zoom(-1);
-});
+zoomOutElement.addEventListener('click', () => { zoom(-1);});
 
-zoomInElement.addEventListener('click', () => {
-  zoom(1);
-});
+zoomInElement.addEventListener('click', () => { zoom(1);});
+
+//Default image scale values
+const resetScale = () => {
+  zoomValueElement.value = DEFAULT_SCALE_TEXT;
+  imgElement.style.transform = DEFAULT_SCALE_TRANSFORM;
+  zoomOutElement.removeEventListener('click', () => {zoom(-1);});
+  zoomInElement.removeEventListener('click', () => {zoom(1);});
+};
 
 export { resetScale };

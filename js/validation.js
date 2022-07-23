@@ -17,7 +17,7 @@ const uploadForm = document.querySelector('.img-upload__form');
 const hashtagInput = document.querySelector('.text__hashtags');
 const commentField = document.querySelector('.text__description');
 
-const getHashtag = (string) => string.trim().toLowerCase().split(' ');
+const getHashtags = () => hashtagInput.value.split(' ').filter(Boolean);
 
 // Пристин
 const pristine = new Pristine(uploadForm,{
@@ -33,19 +33,19 @@ const resetValidator = () => {
 };
 
 const isHashtagUnique = (value) => {
-  const hashtags = getHashtag(value);
+  const hashtags = getHashtags(value);
   const set = new Set(hashtags );
   return (set.size === hashtags .length);
 };
 
 const isValidHashtagLength = (value) => {
-  const hashtagLength = getHashtag(value).length;
+  const hashtagLength = getHashtags(value).length;
   return hashtagLength <= MAX_HASHTAGS;
 };
 
 const isValidHashtag = (value) => reHashtag.test(value);
 const isAllHashtagsValid = (value) => {
-  const hashtags = getHashtag(value);
+  const hashtags = getHashtags(value);
   return hashtags.every((hashtag) => isValidHashtag(hashtag));
 };
 

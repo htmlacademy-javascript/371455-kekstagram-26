@@ -1,6 +1,6 @@
 //применение эффекта для изображения
 
-const effectsOption = {
+const EFFECTS_OPTION = {
   'chrome' : {
     config: {
       range: {min: 0, max: 1},
@@ -77,9 +77,9 @@ noUiSlider.create(sliderElement, sliderConfig);
 
 const applyEffect = () =>  {
   // eslint-disable-next-line prefer-const
-  for (let effect in effectsOption) {
+  for (let effect in EFFECTS_OPTION) {
     if (imgElement.classList.contains(`effects__preview--${effect}`)) {
-      imgElement.style.filter = effectsOption[effect].getCssFilterValue(levelEffectElement.value);
+      imgElement.style.filter = EFFECTS_OPTION[effect].getCssFilterValue(levelEffectElement.value);
       return;
     }
   }
@@ -105,8 +105,8 @@ const onEffectSliderUpdate = () => {
       }
 
       // eslint-disable-next-line prefer-const
-      for (let effect in effectsOption) {
-        if (imgElement.classList.contains(`effects__preview--${effect}`) && typeof effectsOption[effect].config !== 'undefined') {
+      for (let effect in EFFECTS_OPTION) {
+        if (imgElement.classList.contains(`effects__preview--${effect}`) && typeof EFFECTS_OPTION[effect].config !== 'undefined') {
           sliderElement.noUiSlider.updateOptions(sliderConfig);
           return;
         }
@@ -125,15 +125,21 @@ const turnEffectsOn = () => {
 };
 
 const turnEffectsOff = () => {
-  imgElement.style.transform = '';
-  imgElement.style.filter = 'none';
-  imgElement.className = 'effects__preview--none';
+  sliderEffectElement.classList.add('hidden');
+  imgElement.classList = '';
+  imgElement.style.filter = '';
+  sliderElement.noUiSlider.destroy();
+};
 
-  if (sliderElement.noUiSlider) {
-    sliderElement.noUiSlider.destroy();
-  }
+const resetEffects = () => {
+  effectsItemsElement[0].querySelector('input').checked = 'checked';
+  imgElement.style.filter = 'none';
+  imgElement.classList.remove(...imgElement.classList);
+  imgElement.classList.add('effects__preview--none');
+  sliderElement.noUiSlider.destroy();
+  noUiSlider.create(sliderElement, sliderConfig);
 };
 
 turnEffectsOn();
 
-export { turnEffectsOn, turnEffectsOff };
+export { turnEffectsOn, turnEffectsOff, resetEffects };

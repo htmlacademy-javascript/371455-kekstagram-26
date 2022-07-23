@@ -101,7 +101,7 @@ function closeBigPicture () {
   bigPictureContainer.classList.add('hidden');
   body.classList.remove('modal-open');
   newCommentLoaderElement.removeEventListener('click', onLoadButtonClickHandler);
-  document.addEventListener('keydown', onBigPictureEscKeydown);
+  document.removeEventListener('keydown', onBigPictureEscKeydown);
 }
 
 closeElementButton.addEventListener('click', () => {
