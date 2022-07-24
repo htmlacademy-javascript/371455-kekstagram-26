@@ -1,7 +1,8 @@
 // модуль с вспомогательными функциями
 
-// если нажатая клавиша - Esc
+const TIME_OUT_DELAY = 500;
 
+// если нажатая клавиша - Esc
 const isEscapeKey = (evt) => evt.key === 'Escape';
 
 // Функция для проверки максимальной длины строки.
@@ -18,18 +19,18 @@ function getRandomPositiveInteger (a, b) {
 // возвращает случайный элемент массива
 const getRandomArrayElement = (elements) => elements[getRandomPositiveInteger(0, elements.length -1)];
 
-const debounce = (callback, delay) => {
+//для устранения дребезга:
+const debounce = (callback, timeoutDelay = TIME_OUT_DELAY) =>{
   let timeoutId;
+
   return (...rest) => {
     clearTimeout(timeoutId);
-    timeoutId = setTimeout(
-      () => callback.apply(this, rest), delay
-    );
+    timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
   };
 };
 
-
 export {
+  TIME_OUT_DELAY,
   checkStringLength,
   getRandomPositiveInteger,
   getRandomArrayElement,
