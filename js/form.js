@@ -1,17 +1,18 @@
 import { sendData } from './api.js';
-import { overlayClose } from './overlay.js';
 import { isUploadFormValid, resetValidator } from './validation.js';
 import { resetScale } from './scale-picture.js';
 import { showPopupMessage } from './popup-messages.js';
 import { resetEffects } from './effects.js';
 import { body } from './big-picture.js';
+import {isEscapeKey} from './util.js';
 
 const formElement = document.querySelector('.img-upload__form');
 const formSubmitElement = formElement.querySelector('.img-upload__submit');
 const uploadFileElement = formElement.querySelector('#upload-file');
 const textFieldElements = formElement.querySelectorAll('[name="hashtags"], [name="description"]');
 const uploadCancelButton = document.querySelector('.img-upload__cancel');
-
+const overlay = document.querySelector('.img-upload__overlay');
+const imgElement = formElement.querySelector('.img-upload__preview img');
 
 //Блокировка кнопки
 const blockSubmitButton = () => {
@@ -25,32 +26,49 @@ const unblockSubmitButton = () => {
   formSubmitElement.textContent = 'Опубликовать';
 };
 
+const overlayOpen = () => {
+  overlay.classList.remove('hidden');
+};
+
+const overlayClose = () => {
+  overlay.classList.add('hidden');
+};
+
 const resetForm = () => {
-  overlayClose();
-  resetEffects();
   body.classList.remove('modal-open');
   formElement.reset();
   resetValidator();
   resetScale();
-
-  uploadCancelButton.removeEventListener ('click', onFormReset);
+  resetEffects();
 
   uploadFileElement.value = '';
-
+  imgElement.src =
   textFieldElements.forEach((field) => {
     field.value = '';
   });
 };
 
-function onFormReset() {
+const onOverlayEscKeydown = (evt) => {
+  if (isEscapeKey(evt)) {
+    evt.preventDefault();
+    overlayClose();
+    resetForm();
+  }
+};
+
+uploadCancelButton.addEventListener('click', () => {
+  overlayClose();
   resetForm();
-}
+});
+
+document.addEventListener('keydown', onOverlayEscKeydown);
 
 //функция рендерит поп-ап о успехе
 const onSuccess = () => {
   overlayClose();
   unblockSubmitButton();
   showPopupMessage('success');
+  resetForm();
 };
 
 //функция рендерит поп-ап об ошибке
@@ -73,7 +91,6 @@ const setUserFormSubmit = () =>{
         onError,
       );
     }
-    resetForm();
   });
 };
 
@@ -83,4 +100,4 @@ textFieldElements.forEach((field) => {
   });
 });
 
-export { setUserFormSubmit, resetForm };
+export { setUserFormSubmit, resetForm, overlayOpen };

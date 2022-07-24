@@ -1,4 +1,4 @@
-import { overlayOpen } from './overlay.js';
+import { overlayOpen } from './form.js';
 
 const Picture = {
   WIDTH: 600,

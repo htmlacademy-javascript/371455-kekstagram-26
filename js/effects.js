@@ -86,7 +86,7 @@ const sliderElement = sliderEffectElement.querySelector('.effect-level__slider')
 const levelEffectElement = sliderEffectElement.querySelector('.effect-level__value');
 const effectsListElement = document.querySelector('.effects__list');
 const imgElement = document.querySelector('.img-upload__preview img');
-
+sliderEffectElement.classList.add('hidden');
 noUiSlider.create(sliderElement, {
   range: {
     min: 0,
@@ -125,7 +125,7 @@ const resetEffects = () => {
   imgElement.style.filter = 'none';
 };
 
-sliderElement .noUiSlider.on('update', () => {
+sliderElement.noUiSlider.on('update', () => {
   const selectedFilter = effectsListElement.querySelector('input:checked').id;
   const sliderValue = sliderElement.noUiSlider.get();
   levelEffectElement.value = sliderValue;
