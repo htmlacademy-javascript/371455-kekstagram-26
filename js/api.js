@@ -1,26 +1,23 @@
-import { SERVER_URL } from './constants.js';
-import { showMessage } from './alert.js';
+import { showAlertMessage } from './alert.js';
 
+const SERVER_URL = 'https://26.javascript.pages.academy/kekstagram';
 const ERROR_MESSAGE = 'Произошла ошибка загрузки данных с сервера.';
 
-
-const getData = async () => {
+const getData = async (onSuccess) => {
   let response;
 
   try {
     response = await fetch(`${SERVER_URL}/data`);
-
     if (!response.ok) {
       throw new Error(`${response.status} - ${response.statusText}`);
     }
   } catch (error) {
-    showMessage(ERROR_MESSAGE);
+    showAlertMessage(ERROR_MESSAGE);
     return [];
   }
-
   const data = await response.json();
 
-  return data;
+  onSuccess(data);
 };
 
 const sendData = async (form, onSuccess, onFail) => {
@@ -29,11 +26,9 @@ const sendData = async (form, onSuccess, onFail) => {
       SERVER_URL,
       {
         method: 'POST',
-        type: 'multipart/form-data',
         body: new FormData(form),
       }
     );
-
     if (response.ok) {
       onSuccess();
     } else {
@@ -44,5 +39,4 @@ const sendData = async (form, onSuccess, onFail) => {
   }
 };
 
-export { getData,
-  sendData };
+export { getData, sendData };
