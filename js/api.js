@@ -35,7 +35,7 @@ const sendData = async (form, onSuccess, onFail) => {
       throw new Error(`${response.status} - ${response.statusText}`);
     }
   } catch (error) {
-    onFail('Не удалось отправить форму. Попробуйте ещё раз!');
+    onFail();
   }
 };
 

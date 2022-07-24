@@ -42,7 +42,7 @@ const resetForm = () => {
   });
 };
 
-function onFormReset () {
+function onFormReset() {
   resetForm();
 }
 

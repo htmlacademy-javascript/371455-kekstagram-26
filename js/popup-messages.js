@@ -1,6 +1,6 @@
 import { isEscapeKey } from './util.js';
 
-const Z_ORDER = 100;
+const Z_INDEX = 100;
 
 const successTemplate = document.querySelector('#success')
   .content
@@ -18,7 +18,7 @@ const showPopupMessage = (type) => {
   const template = statusConfig[type];
   const popupElement = template.cloneNode(true);
   const closeElement = popupElement.querySelector(`.${type}__button`);
-  popupElement.style.zIndex = Z_ORDER;
+  popupElement.style.zIndex = Z_INDEX;
   document.body.append(popupElement);
 
   const onPopupEscKeydown = (evt) => {

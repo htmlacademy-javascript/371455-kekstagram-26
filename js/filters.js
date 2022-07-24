@@ -19,12 +19,7 @@ const getRandomPosts = (posts) => {
   const randomPosts = [];
 
   for (let i = 0; i < RANDOM_PHOTO_NUMBER; i++) {
-    let random = getRandomArrayElement(posts);
-
-    if (randomPosts.includes(random)) {
-      random = getRandomArrayElement(posts);
-    }
-
+    const random = getRandomArrayElement(posts);
     randomPosts.push(random);
   }
   return randomPosts;

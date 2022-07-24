@@ -7,8 +7,8 @@ const MAX_RULE = 100;
 const uploadForm = document.querySelector('.img-upload__form');
 
 
-const zoomOutElement = uploadForm.querySelector('.scale__control--smaller');
-const zoomInElement = uploadForm.querySelector('.scale__control--bigger');
+const zoomOut = uploadForm.querySelector('.scale__control--smaller');
+const zoomIn = uploadForm.querySelector('.scale__control--bigger');
 const zoomValueElement = uploadForm.querySelector('.scale__control--value');
 const imgElement = uploadForm.querySelector('.img-upload__preview img');
 
@@ -34,16 +34,16 @@ const zoom = (direction=1) => {
   onScaleChange (currentZoom);
 };
 
-zoomOutElement.addEventListener('click', () => { zoom(-1);});
+zoomOut.addEventListener('click', () => { zoom(-1);});
 
-zoomInElement.addEventListener('click', () => { zoom(1);});
+zoomIn.addEventListener('click', () => { zoom(1);});
 
 //Default image scale values
 const resetScale = () => {
   zoomValueElement.value = DEFAULT_SCALE_TEXT;
   imgElement.style.transform = DEFAULT_SCALE_TRANSFORM;
-  zoomOutElement.removeEventListener('click', () => {zoom(-1);});
-  zoomInElement.removeEventListener('click', () => {zoom(1);});
+  zoomOut.removeEventListener('click', () => {zoom(-1);});
+  zoomIn.removeEventListener('click', () => {zoom(1);});
 };
 
 export { resetScale };

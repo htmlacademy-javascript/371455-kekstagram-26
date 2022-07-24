@@ -1,144 +1,137 @@
-//применение эффекта для изображения
+// применение эффекта для изображения
 
 const EFFECTS_OPTION = {
-  'chrome' : {
-    config: {
-      range: {min: 0, max: 1},
+  'effect-none': {
+    filter: 'none',
+    unit: '',
+    class: '',
+    noUiSlider: {
+      range: {
+        min: 0,
+        max: 0
+      },
+      start: 0,
+      step: 0
+    }
+  },
+  'effect-chrome': {
+    filter: 'grayscale',
+    unit: '',
+    class: 'chrome',
+    noUiSlider: {
+      range: {
+        min: 0,
+        max: 1
+      },
+      start: 1,
+      step: 0.1
+    }
+  },
+  'effect-sepia': {
+    filter: 'sepia',
+    unit: '',
+    class: 'sepia',
+    noUiSlider: {
+      range: {
+        min: 0,
+        max: 1
+      },
       start: 1,
       step: 0.1,
-      connect: 'lower',
-    },
-    getCssFilterValue: (value) => `grayscale(${value})`,
+    }
   },
-
-  'sepia': {
-    config: {
-      range: {min: 0, max: 1},
-      start: 1,
-      step: 0.1,
-      connect: 'lower',
-    },
-    getCssFilterValue: (value) => `sepia(${value})`,
-  },
-
-  'marvin': {
-    config: {
-      range: {min: 0, max: 100},
+  'effect-marvin': {
+    filter: 'invert',
+    unit: '%',
+    class: 'marvin',
+    noUiSlider: {
+      range: {
+        min: 0,
+        max: 100
+      },
       start: 100,
       step: 1,
-    },
-    getCssFilterValue: (value) => `invert(${value}%)`,
+    }
   },
-
-  'phobos': {
-    config: {
-      range: {min: 0, max: 100},
-      start: 100,
-      step: 1,
-    },
-    getCssFilterValue: (value) => `blur(${value}px)`,
-  },
-
-  'heat': {
-    config: {
-      range: {min: 0, max: 3},
+  'effect-phobos': {
+    filter: 'blur',
+    unit: 'px',
+    class: 'phobos',
+    noUiSlider: {
+      range: {
+        min: 0,
+        max: 3
+      },
       start: 3,
       step: 0.1,
-    },
-    getCssFilterValue: (value) => `brightness(${value})`,
+    }
   },
-
-  'none' : {
-    // eslint-disable-next-line no-unused-vars
-    getCssFilterValue: (_) => 'none',
-  },
-};
-
-const uploadForm = document.querySelector('.img-upload__form');
-const imgElement = uploadForm.querySelector('.img-upload__preview img');
-const effectsListElement = uploadForm.querySelector('.effects__list');
-const effectsItemsElement = effectsListElement.querySelectorAll('.effects__item');
-const sliderEffectElement = uploadForm.querySelector('.effect-level');
-const levelEffectElement = sliderEffectElement.querySelector('.effect-level__value');
-const sliderElement = document.querySelector('.effect-level__slider');
-
-// Инициализировать слайдер
-const sliderConfig = {
-  range: {
-    min: 0,
-    max: 1,
-  },
-  start: 1,
-  step: 0.1,
-  connect: 'lower',
-};
-
-noUiSlider.create(sliderElement, sliderConfig);
-
-const applyEffect = () =>  {
-  // eslint-disable-next-line prefer-const
-  for (let effect in EFFECTS_OPTION) {
-    if (imgElement.classList.contains(`effects__preview--${effect}`)) {
-      imgElement.style.filter = EFFECTS_OPTION[effect].getCssFilterValue(levelEffectElement.value);
-      return;
+  'effect-heat': {
+    filter: 'brightness',
+    unit: '',
+    class: 'heat',
+    noUiSlider: {
+      range: {
+        min: 1,
+        max: 3
+      },
+      start: 3,
+      step: 0.1,
     }
   }
 };
 
-const onEffectSliderUpdate = () => {
-  for (const effectsItemElement of effectsItemsElement) {
-    const effectRadioElement = effectsItemElement.querySelector('.effects__radio');
+const sliderEffectElement = document.querySelector('.effect-level');
+const sliderElement = sliderEffectElement.querySelector('.effect-level__slider');
+const levelEffectElement = sliderEffectElement.querySelector('.effect-level__value');
+const effectsListElement = document.querySelector('.effects__list');
+const imgElement = document.querySelector('.img-upload__preview img');
 
-    levelEffectElement.classList.add('hidden');
-
-    effectRadioElement.addEventListener('click', () => {
-      imgElement.className = '';
-      imgElement.classList.add(`effects__preview--${effectRadioElement.value}`);
-
-      if (imgElement.className === 'effects__preview--none') {
-        levelEffectElement.classList.add('hidden');
-        sliderElement.setAttribute('disabled', true);
-        imgElement.style.filter = 'none';
-      } else {
-        levelEffectElement.classList.remove('hidden');
-        sliderElement.removeAttribute('disabled');
+noUiSlider.create(sliderElement, {
+  range: {
+    min: 0,
+    max: 1
+  },
+  start: 1,
+  step: 0.1,
+  connect: 'lower',
+  format: {
+    to: (value) => {
+      if (Number.isInteger(value)) {
+        return value.toFixed(0);
       }
+      return value.toFixed(1);
+    },
+    from: (value) => (
+      parseFloat(value)
+    ),
+  }
+});
 
-      // eslint-disable-next-line prefer-const
-      for (let effect in EFFECTS_OPTION) {
-        if (imgElement.classList.contains(`effects__preview--${effect}`) && typeof EFFECTS_OPTION[effect].config !== 'undefined') {
-          sliderElement.noUiSlider.updateOptions(sliderConfig);
-          return;
-        }
-      }
-    });
+const onEffectsList = (evt) => {
+  imgElement.classList = '';
+  if (evt.target.id === 'effect-none') {
+    sliderEffectElement.classList.add('hidden');
+    imgElement.style.filter = 'none';
+  } else {
+    sliderEffectElement.classList.remove('hidden');
+    sliderElement.noUiSlider.updateOptions(EFFECTS_OPTION[evt.target.id].noUiSlider);
+    imgElement.classList.add(`effects__preview--${EFFECTS_OPTION[evt.target.id].class}`);
   }
 };
 
-const turnEffectsOn = () => {
-  sliderElement.noUiSlider.on('update', () => {
-    levelEffectElement.value = sliderElement.noUiSlider.get();
-    applyEffect();
-  });
-
-  onEffectSliderUpdate();
-};
-
-const turnEffectsOff = () => {
-  sliderEffectElement.classList.add('hidden');
-  imgElement.classList = '';
-  imgElement.style.filter = '';
-  sliderElement.noUiSlider.destroy();
-};
-
 const resetEffects = () => {
-  effectsItemsElement[0].querySelector('input').checked = 'checked';
+  sliderEffectElement.classList.add('hidden');
   imgElement.style.filter = 'none';
-  imgElement.classList.remove(...imgElement.classList);
-  imgElement.classList.add('effects__preview--none');
-  sliderElement. noUiSkider.updateOptions({start: 0});
 };
 
-turnEffectsOn();
+sliderElement .noUiSlider.on('update', () => {
+  const selectedFilter = effectsListElement.querySelector('input:checked').id;
+  const sliderValue = sliderElement.noUiSlider.get();
+  levelEffectElement.value = sliderValue;
+  imgElement.style.filter = `${EFFECTS_OPTION[selectedFilter].filter}(${sliderValue}${EFFECTS_OPTION[selectedFilter].unit})`;
+});
 
-export { turnEffectsOn, turnEffectsOff, resetEffects };
+effectsListElement.addEventListener('change', onEffectsList);
+
+export { resetEffects };
