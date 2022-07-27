@@ -6,6 +6,7 @@ const imgFilters = document.querySelector('.img-filters');
 const randomFilter = imgFilters.querySelector('#filter-random');
 const discussedFilter = imgFilters.querySelector('#filter-discussed');
 const defaultFilter = imgFilters.querySelector('#filter-default');
+const imgFiltersForm = document.querySelector('.img-filters__form');
 
 // Удаляем фото
 const removePosts = () => {
@@ -38,34 +39,35 @@ const removeActiveClass = () => {
   defaultFilter.classList.remove('img-filters__button--active');
 };
 
+
 const activateFilters = (posts) => {
   imgFilters.classList.remove('img-filters--inactive');
+  const randomPost = getRandomPosts(posts);
+  const discussedPosts = getDiscussedPosts(posts);
 
-  randomFilter.addEventListener('click', debounce(() => {
-    removePosts();
-    removeActiveClass();
-    randomFilter.classList.add('img-filters__button--active');
-    const randomPost = getRandomPosts(posts);
-    createPictureElement(randomPost);
-  }, TIME_OUT_DELAY));
-
-  discussedFilter.addEventListener('click', debounce(() => {
-    removePosts();
-    removeActiveClass();
-    discussedFilter.classList.add('img-filters__button--active');
-
-    const discussedPosts = getDiscussedPosts(posts);
-
-    createPictureElement(discussedPosts);
-  }, TIME_OUT_DELAY));
-
-  defaultFilter.addEventListener('click', debounce(() => {
-    removePosts();
-    removeActiveClass();
-    defaultFilter.classList.add('img-filters__button--active');
-
-    createPictureElement(posts);
-  }, TIME_OUT_DELAY));
+  imgFiltersForm.addEventListener('click', debounce((evt) => {
+    switch (evt.target.id){
+      case 'filter-random':
+        removePosts();
+        removeActiveClass();
+        randomFilter.classList.add('img-filters__button--active');
+        createPictureElement(randomPost);
+        break;
+      case 'filter-discussed':
+        removePosts();
+        removeActiveClass();
+        discussedFilter.classList.add('img-filters__button--active');
+        createPictureElement(discussedPosts);
+        break;
+      case 'filter-default':
+        removePosts();
+        removeActiveClass();
+        defaultFilter.classList.add('img-filters__button--active');
+        createPictureElement(posts);
+        break;
+    }
+  }, TIME_OUT_DELAY));///////////// убрать ли?
 };
 
 export { activateFilters, removeActiveClass };
+

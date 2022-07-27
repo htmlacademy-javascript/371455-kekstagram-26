@@ -1,4 +1,4 @@
-import { overlayOpen } from './form.js';
+import { openOverlay } from './form.js';
 
 const Picture = {
   WIDTH: 600,
@@ -24,7 +24,7 @@ uploadButton.addEventListener('change', (evt) => {
       previewImg.width = Picture.WIDTH;
       previewImg.height = Picture.HEIGHT;
 
-      overlayOpen();
+      openOverlay();
     });
 
     reader.readAsDataURL(file);

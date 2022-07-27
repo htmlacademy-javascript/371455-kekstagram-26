@@ -110,7 +110,7 @@ noUiSlider.create(sliderElement, {
   }
 });
 
-const onEffectsList = (evt) => {
+const onEffectsListChange = (evt) => {
   imgElement.classList = '';
   if (evt.target.id === 'effect-none') {
     sliderEffectElement.classList.add('hidden');
@@ -134,6 +134,6 @@ sliderElement.noUiSlider.on('update', () => {
   imgElement.style.filter = `${EFFECTS_OPTION[selectedFilter].filter}(${sliderValue}${EFFECTS_OPTION[selectedFilter].unit})`;
 });
 
-effectsListElement.addEventListener('change', onEffectsList);
+effectsListElement.addEventListener('change', onEffectsListChange);
 
 export { resetEffects };

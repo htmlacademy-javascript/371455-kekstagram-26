@@ -25,11 +25,11 @@ const unblockSubmitButton = () => {
   formSubmitElement.textContent = 'Опубликовать';
 };
 
-const overlayOpen = () => {
+const openOverlay = () => {
   overlay.classList.remove('hidden');
 };
 
-const overlayClose = () => {
+const closeOverlay = () => {
   overlay.classList.add('hidden');
 };
 
@@ -49,21 +49,21 @@ const resetForm = () => {
 const onOverlayEscKeydown = (evt) => {
   if (isEscapeKey(evt)) {
     evt.preventDefault();
-    overlayClose();
+    closeOverlay();
     resetForm();
   }
 };
 
 uploadCancelButton.addEventListener('click', () => {
-  overlayClose();
+  closeOverlay();
   resetForm();
 });
 
-document.addEventListener('keydown', onOverlayEscKeydown);
+document.addEventListener('keydown', onOverlayEscKeydown);//////////////////// переместить в onSuccess???
 
 //функция рендерит поп-ап о успехе
 const onSuccess = () => {
-  overlayClose();
+  closeOverlay();
   unblockSubmitButton();
   showPopupMessage('success');
   resetForm();
@@ -97,4 +97,4 @@ textFieldElements.forEach((field) => {
   });
 });
 
-export { setUserFormSubmit, resetForm, overlayOpen };
+export { setUserFormSubmit, resetForm, openOverlay };

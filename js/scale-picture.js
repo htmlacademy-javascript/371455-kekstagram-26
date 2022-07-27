@@ -39,6 +39,7 @@ zoomInElement.addEventListener('click', () => { zoom(1);});
 const resetScale = () => {
   zoomValueElement.value = DEFAULT_SCALE_TEXT;
   imgElement.style.transform = DEFAULT_SCALE_TRANSFORM;
+  zoom(); /////////////////
   zoomOutElement.removeEventListener('click', () => {zoom(-1);});
   zoomInElement.removeEventListener('click', () => {zoom(1);});
 };
