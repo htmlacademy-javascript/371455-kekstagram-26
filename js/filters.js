@@ -66,7 +66,7 @@ const activateFilters = (posts) => {
         createPictureElement(posts);
         break;
     }
-  }, TIME_OUT_DELAY));///////////// убрать ли?
+  }, TIME_OUT_DELAY));
 };
 
 export { activateFilters, removeActiveClass };

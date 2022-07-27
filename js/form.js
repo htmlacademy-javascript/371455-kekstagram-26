@@ -27,6 +27,7 @@ const unblockSubmitButton = () => {
 
 const openOverlay = () => {
   overlay.classList.remove('hidden');
+  body.classList.add('modal-open');
 };
 
 const closeOverlay = () => {
@@ -46,20 +47,20 @@ const resetForm = () => {
   });
 };
 
-const onOverlayEscKeydown = (evt) => {
+function onOverlayEscKeydown(evt) {
   if (isEscapeKey(evt)) {
     evt.preventDefault();
     closeOverlay();
     resetForm();
+    document.removeEventListener('keydown', onOverlayEscKeydown);
   }
-};
+}
 
 uploadCancelButton.addEventListener('click', () => {
   closeOverlay();
   resetForm();
+  document.removeEventListener('keydown', onOverlayEscKeydown);
 });
-
-document.addEventListener('keydown', onOverlayEscKeydown);//////////////////// переместить в onSuccess???
 
 //функция рендерит поп-ап о успехе
 const onSuccess = () => {
@@ -67,6 +68,7 @@ const onSuccess = () => {
   unblockSubmitButton();
   showPopupMessage('success');
   resetForm();
+  document.addEventListener('keydown', onOverlayEscKeydown);
 };
 
 //функция рендерит поп-ап об ошибке
@@ -82,7 +84,7 @@ const setUserFormSubmit = () =>{
 
     if (isValid) {
       blockSubmitButton();
-      sendData (
+      sendData(
         evt.target,
         onSuccess,
         onError,

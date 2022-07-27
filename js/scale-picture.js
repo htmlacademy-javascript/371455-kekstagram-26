@@ -28,7 +28,7 @@ const zoom = (direction=1) => {
     currentZoom += direction * ZOOM_STEP;
   }
 
-  onScaleChange (currentZoom);
+  onScaleChange(currentZoom);
 };
 
 zoomOutElement.addEventListener('click', () => { zoom(-1);});
@@ -39,7 +39,7 @@ zoomInElement.addEventListener('click', () => { zoom(1);});
 const resetScale = () => {
   zoomValueElement.value = DEFAULT_SCALE_TEXT;
   imgElement.style.transform = DEFAULT_SCALE_TRANSFORM;
-  zoom(); /////////////////
+  onScaleChange(MAX_RULE);
   zoomOutElement.removeEventListener('click', () => {zoom(-1);});
   zoomInElement.removeEventListener('click', () => {zoom(1);});
 };
