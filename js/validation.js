@@ -32,7 +32,7 @@ const resetValidator = () => {
 
 const isHashtagUnique = (value) => {
   const hashtags = getHashtags(value);
-  const lowercaseHashtags = hashtags.map((hashtag) => hashtag.toLowerCase());/////////////
+  const lowercaseHashtags = hashtags.map((hashtag) => hashtag.toLowerCase());
   const set = new Set(lowercaseHashtags);
 
   return (set.size === lowercaseHashtags.length);
