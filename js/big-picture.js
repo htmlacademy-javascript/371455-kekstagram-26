@@ -74,7 +74,7 @@ const updateBigPicture = (post) => {
   commentCountElement.textContent = post.comments.length;
 };
 
-const onLoadButtonClickHandler = () => {
+const onLoadButtonClick = () => {
   commentsModel.setNextDose();
   renderStats(commentsModel.getVisible(), commentsModel.getTotal());
   renderCommentList(commentsModel.getCommentDose());
@@ -88,7 +88,7 @@ const openBigPicture = (post) => {
   clearCommentsList();
   renderCommentList(commentsModel.getCommentDose());
   renderLoadButton(commentsModel.getVisible(), commentsModel.getTotal());
-  newCommentLoaderElement.addEventListener('click', onLoadButtonClickHandler);
+  newCommentLoaderElement.addEventListener('click', onLoadButtonClick);
 
   bigPictureContainer.classList.remove('hidden');
   body.classList.add('modal-open');
@@ -100,7 +100,7 @@ const openBigPicture = (post) => {
 function closeBigPicture() {
   bigPictureContainer.classList.add('hidden');
   body.classList.remove('modal-open');
-  newCommentLoaderElement.removeEventListener('click', onLoadButtonClickHandler);
+  newCommentLoaderElement.removeEventListener('click', onLoadButtonClick);
   document.removeEventListener('keydown', onBigPictureEscKeydown);
 }
 

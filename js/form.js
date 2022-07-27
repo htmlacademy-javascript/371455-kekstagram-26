@@ -25,11 +25,12 @@ const unblockSubmitButton = () => {
   formSubmitElement.textContent = 'Опубликовать';
 };
 
-const overlayOpen = () => {
+const openOverlay = () => {
   overlay.classList.remove('hidden');
+  body.classList.add('modal-open');
 };
 
-const overlayClose = () => {
+const closeOverlay = () => {
   overlay.classList.add('hidden');
 };
 
@@ -46,27 +47,28 @@ const resetForm = () => {
   });
 };
 
-const onOverlayEscKeydown = (evt) => {
+function onOverlayEscKeydown(evt) {
   if (isEscapeKey(evt)) {
     evt.preventDefault();
-    overlayClose();
+    closeOverlay();
     resetForm();
+    document.removeEventListener('keydown', onOverlayEscKeydown);
   }
-};
+}
 
 uploadCancelButton.addEventListener('click', () => {
-  overlayClose();
+  closeOverlay();
   resetForm();
+  document.removeEventListener('keydown', onOverlayEscKeydown);
 });
-
-document.addEventListener('keydown', onOverlayEscKeydown);
 
 //функция рендерит поп-ап о успехе
 const onSuccess = () => {
-  overlayClose();
+  closeOverlay();
   unblockSubmitButton();
   showPopupMessage('success');
   resetForm();
+  document.addEventListener('keydown', onOverlayEscKeydown);
 };
 
 //функция рендерит поп-ап об ошибке
@@ -82,7 +84,7 @@ const setUserFormSubmit = () =>{
 
     if (isValid) {
       blockSubmitButton();
-      sendData (
+      sendData(
         evt.target,
         onSuccess,
         onError,
@@ -97,4 +99,4 @@ textFieldElements.forEach((field) => {
   });
 });
 
-export { setUserFormSubmit, resetForm, overlayOpen };
+export { setUserFormSubmit, resetForm, openOverlay };
