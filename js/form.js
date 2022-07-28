@@ -28,6 +28,7 @@ const unblockSubmitButton = () => {
 const openOverlay = () => {
   overlay.classList.remove('hidden');
   body.classList.add('modal-open');
+  document.addEventListener('keydown', onOverlayEscKeydown);
 };
 
 const closeOverlay = () => {
