@@ -28,6 +28,7 @@ const unblockSubmitButton = () => {
 const openOverlay = () => {
   overlay.classList.remove('hidden');
   body.classList.add('modal-open');
+  document.addEventListener('keydown', onOverlayEscKeydown);
 };
 
 const closeOverlay = () => {
@@ -48,7 +49,8 @@ const resetForm = () => {
 };
 
 function onOverlayEscKeydown(evt) {
-  if (isEscapeKey(evt)) {
+  const hasErrorPopup = document.querySelector('.error');
+  if (isEscapeKey(evt) && !hasErrorPopup) {
     evt.preventDefault();
     closeOverlay();
     resetForm();
