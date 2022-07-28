@@ -49,7 +49,8 @@ const resetForm = () => {
 };
 
 function onOverlayEscKeydown(evt) {
-  if (isEscapeKey(evt)) {
+  const hasErrorPopup = document.querySelector('.error');
+  if (isEscapeKey(evt) && !hasErrorPopup) {
     evt.preventDefault();
     closeOverlay();
     resetForm();
